@@ -39,6 +39,6 @@ const product = {
       to: [{ type: 'category' }],
     },
   ],
-}
+};
 
 export default product;
