@@ -25,7 +25,27 @@ const product = {
       name: 'images',
       title: 'Product Images',
       type: 'array',
-      of: [{ type: 'image' }],
+      of: [
+        {
+          name: 'imageObject',
+          type: 'object',
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+            },
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Image',
+              options: {
+                hotspot: true,
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'description',

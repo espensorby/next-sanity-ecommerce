@@ -1,0 +1,24 @@
+import { Image } from 'sanity';
+
+export interface HeroImages {
+  _id: string;
+  _createdAt: string;
+  image1: Image;
+  image2: Image;
+  alt1: string;
+  alt2: string;
+  image1Url: string;
+  image2Url: string;
+}
+
+export interface SimplifiedProduct {
+  _id: string;
+  _createdAt: string;
+  name: string;
+  price: number;
+  slug: string;
+  categoryName: string;
+  image: Image;
+  imageUrl: string;
+  alt: string;
+}

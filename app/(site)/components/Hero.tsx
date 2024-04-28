@@ -20,8 +20,8 @@ export default async function Hero() {
         <div className="flex w-full mb-12 md:mb-16 lg:w-2/3">
           <div className="relative left-12 top-12 z-10 ml-12 rounded-lg bg-gray-100 shadow-lg overflow-hidden md:left-16 md:top-16 lg:ml-0">
             <Image
-              src={heroImages.urlImg2}
-              alt={heroImages.altImg2}
+              src={heroImages.image2Url}
+              alt={heroImages.alt2}
               className="w-full h-full object-cover object-center"
               width={500}
               height={500}
@@ -30,8 +30,8 @@ export default async function Hero() {
           </div>
           <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
             <Image
-              src={heroImages.urlImg1}
-              alt={heroImages.altImg1}
+              src={heroImages.image1Url}
+              alt={heroImages.alt1}
               className="w-full h-full object-cover object-center"
               width={500}
               height={500}
