@@ -13,8 +13,8 @@ export default async function Hero() {
             Top Fashion for a top price!
           </h1>
           <p className="max-w-md leading-relaxed text-gray-500 xl:text-lg">
-            The best place to find the latest in fashion and style. We sell only
-            the most exclusive and high quality products.
+            The best place to find the latest in fashion and style. We sell only the most exclusive
+            and high quality products.
           </p>
         </div>
         <div className="flex w-full mb-12 md:mb-16 lg:w-2/3">
@@ -41,7 +41,7 @@ export default async function Hero() {
         </div>
       </div>
       <div className="flex flex-col justify-between items-center gap-8 md:flex-row">
-        <div className="flex divide-x w-64 h-12 border rounded-lg overflow-hidden">
+        <div className="flex divide-x w-96 h-12 border rounded-lg overflow-hidden">
           <Link
             href="/Men"
             className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
@@ -56,6 +56,11 @@ export default async function Hero() {
             href="/Teens"
             className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
             Teens
+          </Link>
+          <Link
+            href="/All"
+            className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
+            All
           </Link>
         </div>
       </div>

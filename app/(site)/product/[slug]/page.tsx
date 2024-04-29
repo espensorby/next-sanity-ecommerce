@@ -1,5 +1,5 @@
 import { getProduct } from '@/sanity/sanity-utils';
-import ImageGallery from '../../components/ImageGallery';
+import ImageGallery from '../../(components)/ImageGallery';
 import { Button } from '@/components/ui/button';
 import { Star, Truck } from 'lucide-react';
 
