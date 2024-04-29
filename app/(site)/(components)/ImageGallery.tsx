@@ -9,6 +9,11 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
   const [bigImage, setBigImage] = useState(images[0].image);
   const [bigImageAlt, setBigImageAlt] = useState(images[0].alt);
 
+  const handleSetBigImage = (image: CustomImage) => {
+    setBigImage(image.image);
+    setBigImageAlt(image.alt);
+  };
+
   return (
     <div className="grid gap-4 lg:grid-cols-5">
       <div className="flex gap-4 order-last lg:flex-col lg:order-none">
@@ -20,10 +25,8 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
               width={200}
               height={200}
               className="w-full h-full object-cover object-center cursor-pointer"
-              onClick={() => {
-                setBigImage(image.image);
-                setBigImageAlt(image.alt);
-              }}
+              onClick={() => handleSetBigImage(image)}
+              onMouseEnter={() => handleSetBigImage(image)}
             />
           </div>
         ))}
