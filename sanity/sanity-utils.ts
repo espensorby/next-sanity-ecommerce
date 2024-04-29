@@ -20,6 +20,23 @@ export async function getHeroImages(): Promise<HeroImages> {
   };
 }
 
+export async function getProduct(slug: string): Promise<Product> {
+  const query = groq`*[_type == "product" && slug.current == $slug][0]{
+    _id,
+    _createdAt,
+    name,
+    price,
+    images,
+    description,
+    "slug": slug.current,
+    "categoryName": category->name,
+  }`;
+
+  const data: Product = await client.fetch(query, { slug });
+
+  return data;
+}
+
 export async function getNewestProducts(): Promise<SimplifiedProduct[]> {
   const query = groq`*[_type == "product"][0...4] | order(_createdAt desc){
     _id,
@@ -42,19 +59,24 @@ export async function getNewestProducts(): Promise<SimplifiedProduct[]> {
   return newestProducts;
 }
 
-export async function getProduct(slug: string): Promise<Product> {
-  const query = groq`*[_type == "product" && slug.current == $slug][0]{
+export async function getProductsFromCategory(category: string): Promise<SimplifiedProduct[]> {
+  const query = groq`*[_type == "product" && $category in category[]->name]{
     _id,
     _createdAt,
     name,
     price,
-    images,
-    description,
     "slug": slug.current,
-    "categoryName": category->name,
+    "categoryNames": category[]->name,
+    "image": images[0].image,
+    "alt": images[0].alt,
   }`;
 
-  const data: Product = await client.fetch(query, { slug });
-
-  return data;
+  const data: SimplifiedProduct[] = await client.fetch(query, { category });
+  const productsFromCategory = data.map((product) => {
+    return {
+      ...product,
+      imageUrl: urlForImage(product.image),
+    };
+  });
+  return productsFromCategory;
 }

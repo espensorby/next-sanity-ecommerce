@@ -1,27 +1,21 @@
-import { getNewestProducts } from '@/sanity/sanity-utils';
-import { ArrowRight } from 'lucide-react';
+import { getProductsFromCategory } from '@/sanity/sanity-utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function Newest() {
-  const newestProducts = await getNewestProducts();
+export default async function CategoryPage({ params }: { params: { category: string } }) {
+  const productsByCategory = await getProductsFromCategory(params.category);
 
   return (
     <div className="bg-white">
-      <div className="max-w-2xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Our Newest Products</h2>
-
-          <Link href="/All" className="flex items-center gap-x-1text-primary hover:text-gray-700">
-            See all{' '}
-            <span>
-              <ArrowRight />
-            </span>
-          </Link>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+            Our Products{params.category == 'All' ? '' : ` for ${params.category}`}
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 mt-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {newestProducts.map((product) => (
+          {productsByCategory.map((product) => (
             <div key={product._id} className="group relative">
               <Link href={`/product/${product.slug}`}>
                 <div className="w-full aspect-square rounded-md bg-gray-200 overflow-hidden group-hover:opacity-75 lg:h-80">

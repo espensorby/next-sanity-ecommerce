@@ -59,12 +59,20 @@ const product = defineType({
       type: 'text',
     },
     {
-      name: 'category',
-      title: 'Product Category',
-      type: 'reference',
-      to: [{ type: 'category' }],
+      name: 'categories',
+      title: 'Product Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'category' }] }],
     },
   ],
+  initialValue: () => ({
+    categories: [
+      {
+        _type: 'reference',
+        _ref: '62264a03-3349-45df-9581-e0c31e8f6f9f', // the _id of the "All" category, so that all products are in the "All" category by default
+      },
+    ],
+  }),
 });
 
 export default product;
