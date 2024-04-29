@@ -1,4 +1,6 @@
-const category = {
+import { defineType } from 'sanity';
+
+const category = defineType({
   name: 'category',
   title: 'Categories',
   type: 'document',
@@ -17,6 +19,6 @@ const category = {
       },
     },
   ],
-};
+});
 
 export default category;

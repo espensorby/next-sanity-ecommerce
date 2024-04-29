@@ -1,7 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { groq } from 'next-sanity';
 import { urlForImage } from '@/sanity/lib/image';
-import { HeroImages, SimplifiedProduct } from '@/types/types';
+import { HeroImages, SimplifiedProduct, Product } from '@/types/types';
 
 export async function getHeroImages(): Promise<HeroImages> {
   const query = groq`*[_type == "heroImage"][0]{
@@ -31,8 +31,8 @@ export async function getNewestProducts(): Promise<SimplifiedProduct[]> {
     "image": images[0].image,
     "alt": images[0].alt,
   }`;
+
   const data: SimplifiedProduct[] = await client.fetch(query);
-  console.log('data: ', data);
   const newestProducts = data.map((product) => {
     return {
       ...product,
@@ -40,4 +40,21 @@ export async function getNewestProducts(): Promise<SimplifiedProduct[]> {
     };
   });
   return newestProducts;
+}
+
+export async function getProduct(slug: string): Promise<Product> {
+  const query = groq`*[_type == "product" && slug.current == $slug][0]{
+    _id,
+    _createdAt,
+    name,
+    price,
+    images,
+    description,
+    "slug": slug.current,
+    "categoryName": category->name,
+  }`;
+
+  const data: Product = await client.fetch(query, { slug });
+
+  return data;
 }

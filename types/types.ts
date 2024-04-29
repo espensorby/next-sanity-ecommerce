@@ -1,4 +1,12 @@
+import { SanityImageObject } from '@sanity/image-url/lib/types/types';
 import { Image } from 'sanity';
+
+export interface CustomImage {
+  [key: string]: unknown;
+  image: Image;
+  _type: SanityImageObject;
+  alt: string;
+}
 
 export interface HeroImages {
   _id: string;
@@ -21,4 +29,9 @@ export interface SimplifiedProduct {
   image: Image;
   imageUrl: string;
   alt: string;
+}
+
+export interface Product extends Omit<SimplifiedProduct, 'image' | 'imageUrl' | 'alt'> {
+  images: CustomImage[];
+  description: string;
 }
