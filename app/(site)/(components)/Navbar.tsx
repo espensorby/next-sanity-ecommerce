@@ -4,16 +4,18 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag } from 'lucide-react';
+import { Category } from '@/types/types';
 
-const links = [
-  { name: 'Men', href: '/Men' },
-  { name: 'Women', href: '/Women' },
-  { name: 'Teens', href: '/Teens' },
-  { name: 'All Products', href: '/All' },
-];
-
-export default function Navbar() {
+export default function Navbar({ categories }: { categories: Category[] }) {
   const pathName = usePathname();
+  const links = [
+    ...categories.map((category) => ({
+      key: category._id,
+      name: category.name,
+      href: `/${category.slug}`,
+    })),
+  ];
+
   return (
     <header className="mb-8 border-b">
       <div

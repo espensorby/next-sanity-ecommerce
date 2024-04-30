@@ -1,7 +1,8 @@
 import { defineType, defineField } from 'sanity';
 
 declare module 'sanity' {
-  // redeclare StringOptions; it will be merged with StringOptions in the sanity module
+  // redeclare StringOptions; it will be merged with StringOptions in the sanity module.
+  // Not strictly necessary, as we could just remove defineField, but I added it here to show the possibility.
   export interface StringOptions {
     isHighlighted?: boolean;
   }

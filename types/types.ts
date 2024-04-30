@@ -35,3 +35,9 @@ export interface Product extends Omit<SimplifiedProduct, 'image' | 'imageUrl' | 
   images: CustomImage[];
   description: string;
 }
+
+export interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+}

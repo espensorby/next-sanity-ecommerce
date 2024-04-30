@@ -1,9 +1,11 @@
 import { getHeroImages } from '@/sanity/sanity-utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getCategories } from '@/sanity/sanity-utils';
 
 export default async function Hero() {
   const heroImages = await getHeroImages();
+  const categories = await getCategories();
 
   return (
     <section className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -42,26 +44,14 @@ export default async function Hero() {
       </div>
       <div className="flex flex-col justify-between items-center gap-8 md:flex-row">
         <div className="flex divide-x w-full h-12 border rounded-lg overflow-hidden md:w-96">
-          <Link
-            href="/Men"
-            className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
-            Men
-          </Link>
-          <Link
-            href="/Women"
-            className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
-            Women
-          </Link>
-          <Link
-            href="/Teens"
-            className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
-            Teens
-          </Link>
-          <Link
-            href="/All"
-            className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
-            All
-          </Link>
+          {categories.map((category) => (
+            <Link
+              key={category._id}
+              href={`/${category.slug}`}
+              className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
+              {category.name}
+            </Link>
+          ))}
         </div>
       </div>
     </section>

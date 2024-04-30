@@ -1,7 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { groq } from 'next-sanity';
 import { urlForImage } from '@/sanity/lib/image';
-import { HeroImages, SimplifiedProduct, Product } from '@/types/types';
+import { HeroImages, SimplifiedProduct, Product, Category } from '@/types/types';
 
 export async function getHeroImages(): Promise<HeroImages> {
   const query = groq`*[_type == "heroImage"][0]{
@@ -32,7 +32,7 @@ export async function getProduct(slug: string): Promise<Product> {
     "categoryName": category->name,
   }`;
 
-  const data: Product = await client.fetch(query, { slug });
+  const data = await client.fetch(query, { slug });
 
   return data;
 }
@@ -79,4 +79,14 @@ export async function getProductsFromCategory(category: string): Promise<Simplif
     };
   });
   return productsFromCategory;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const query = groq`*[_type == "category"]{
+    _id,
+    name,
+    "slug": slug.current,
+  }`;
+
+  return await client.fetch(query);
 }
