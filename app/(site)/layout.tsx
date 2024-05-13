@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import Navbar from './(components)/Navbar';
 import '../globals.css';
 import { getCategories } from '@/sanity/sanity-utils';
+import CartProvider from './(components)/Providers';
+import ShoppingCartModal from './(components)/ShoppingCartModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,8 +23,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar categories={categories} />
-        {children}
+        <CartProvider>
+          <Navbar categories={categories} />
+          <ShoppingCartModal />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,7 +1,8 @@
 import { getProduct } from '@/sanity/sanity-utils';
-import ImageGallery from '../../(components)/ImageGallery';
 import { Button } from '@/components/ui/button';
 import { Star, Truck } from 'lucide-react';
+import ImageGallery from '../../(components)/ImageGallery';
+import AddToCart from '../../(components)/AddToCart';
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = await getProduct(params.slug);
@@ -40,7 +41,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </div>
 
             <div className="flex gap-2.5">
-              <Button>Add to Cart</Button>
+              <AddToCart
+                currency="USD"
+                price={product.price}
+                name={product.name}
+                description={product.description}
+                image={product.images[0].image}
+              />
               <Button variant="secondary">Go to Checkout</Button>
             </div>
 

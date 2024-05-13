@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag } from 'lucide-react';
 import { Category } from '@/types/types';
+import { useShoppingCart } from 'use-shopping-cart';
 
 export default function Navbar({ categories }: { categories: Category[] }) {
   const pathName = usePathname();
@@ -15,6 +16,7 @@ export default function Navbar({ categories }: { categories: Category[] }) {
       href: `/${category.slug}`,
     })),
   ];
+  const { handleCartClick } = useShoppingCart();
 
   return (
     <header className="mb-8 border-b">
@@ -46,6 +48,7 @@ export default function Navbar({ categories }: { categories: Category[] }) {
         <div className="flex divide-x border-r sm:border-l">
           <Button
             variant={'outline'}
+            onClick={() => handleCartClick()}
             className="flex flex-col gap-y-1.5 w-12 h-12 sm:w-20 sm:h-20 md:w-24 m:h-24 rounded-none">
             <ShoppingBag />
             <span className="hidden text-xs font-semibold text-gray-500 sm:block">Cart</span>
