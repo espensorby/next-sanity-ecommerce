@@ -2,30 +2,20 @@
 
 import { Button } from '@/components/ui/button';
 import { urlForImage } from '@/sanity/lib/image';
-import { Image } from 'sanity';
 import { useShoppingCart } from 'use-shopping-cart';
-
-export interface ProductCartType {
-  name: string;
-  description: string;
-  price: number;
-  currency: string;
-  image: Image;
-}
+import { ProductCartType } from '@/types/types';
 
 export default function AddToCart(product: ProductCartType) {
-  const { addItem, handleCartClick } = useShoppingCart();
-  const productAdded = {
+  const { addItem } = useShoppingCart();
+  const productToAdd = {
     ...product,
     image: urlForImage(product.image),
-    sku: 'hasgdfk',
   };
 
   return (
     <Button
       onClick={() => {
-        addItem(productAdded);
-        handleCartClick();
+        addItem(productToAdd);
       }}>
       Add to cart
     </Button>

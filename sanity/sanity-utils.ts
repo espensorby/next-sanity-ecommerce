@@ -26,6 +26,7 @@ export async function getProduct(slug: string): Promise<Product> {
     _createdAt,
     name,
     price,
+    price_id,
     images,
     description,
     "slug": slug.current,

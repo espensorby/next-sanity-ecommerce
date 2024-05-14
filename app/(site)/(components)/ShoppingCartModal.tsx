@@ -6,8 +6,32 @@ import Image from 'next/image';
 import { useShoppingCart } from 'use-shopping-cart';
 
 export default function ShoppingCartModal() {
-  const { cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice } =
-    useShoppingCart();
+  const {
+    cartCount,
+    shouldDisplayCart,
+    handleCartClick,
+    cartDetails,
+    removeItem,
+    totalPrice,
+    redirectToCheckout,
+    clearCart,
+  } = useShoppingCart();
+
+  async function handleCheckoutClick(event: any) {
+    event.preventDefault();
+    try {
+      const result = await redirectToCheckout();
+      if (result?.error) {
+        console.log(result.error);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error('Error redirecting to checkout: ' + error.message);
+      } else {
+        throw error; // rethrow the error unchanged
+      }
+    }
+  }
 
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
@@ -69,7 +93,9 @@ export default function ShoppingCartModal() {
               Shipping and taxes are calculated at checkout.
             </p>
             <div className="mt-6">
-              <Button className="w-full">Checkout</Button>
+              <Button onClick={handleCheckoutClick} className="w-full">
+                Checkout
+              </Button>
             </div>
             <div className="flex justify-center text-center text-sm text-gray-500 mt-6">
               <p>

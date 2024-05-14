@@ -38,6 +38,7 @@ export default function ImageGallery({ images }: { images: CustomImage[] }) {
           width={500}
           height={500}
           className="w-full h-full object-cover object-center"
+          priority
         />
         <span className="absolute left-0 top-0 px-3 py-1.5 rounded-br-lg bg-red-500 text-sm uppercase text-white tracking-wider">
           Sale

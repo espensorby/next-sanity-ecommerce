@@ -24,6 +24,11 @@ const product = defineType({
       type: 'number',
     },
     {
+      name: 'price_id',
+      title: 'Stripe Price ID', // This is the ID of the price object in Stripe
+      type: 'string',
+    },
+    {
       name: 'images',
       title: 'Product Images',
       type: 'array',

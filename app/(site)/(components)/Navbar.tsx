@@ -10,13 +10,15 @@ import { useShoppingCart } from 'use-shopping-cart';
 export default function Navbar({ categories }: { categories: Category[] }) {
   const pathName = usePathname();
   const links = [
-    ...categories.map((category) => ({
-      key: category._id,
-      name: category.name,
-      href: `/${category.slug}`,
-    })),
+    ...categories
+      .sort((a, b) => b.name.localeCompare(a.name))
+      .map((category) => ({
+        key: category._id,
+        name: category.name,
+        href: `/${category.slug}`,
+      })),
   ];
-  const { handleCartClick } = useShoppingCart();
+  const { handleCartClick, cartCount } = useShoppingCart();
 
   return (
     <header className="mb-8 border-b">
@@ -25,12 +27,12 @@ export default function Navbar({ categories }: { categories: Category[] }) {
     lg:max-w-7xl">
         <Link href="/">
           <h1 className="text-2xl md:text-4xl font-bold">
-            Next <span className="text-primary">Commerce</span>
+            Next<span className="text-primary">Commerce</span>
           </h1>
         </Link>
         <nav className="hidden gap-12 lg:flex 2xl:ml-16">
-          {links.map((link, idx) => (
-            <div key={idx}>
+          {links.map((link) => (
+            <div key={link.key}>
               {pathName === link.href ? (
                 <Link href={link.href} className="text-lg font-semibold text-primary">
                   {link.name}
@@ -45,7 +47,7 @@ export default function Navbar({ categories }: { categories: Category[] }) {
             </div>
           ))}
         </nav>
-        <div className="flex divide-x border-r sm:border-l">
+        <div className="relative flex divide-x border-r sm:border-l">
           <Button
             variant={'outline'}
             onClick={() => handleCartClick()}
@@ -53,6 +55,11 @@ export default function Navbar({ categories }: { categories: Category[] }) {
             <ShoppingBag />
             <span className="hidden text-xs font-semibold text-gray-500 sm:block">Cart</span>
           </Button>
+          {cartCount !== 0 && (
+            <span className="absolute top-1 right-2 px-2 text-white bg-red-500 rounded-xl">
+              {cartCount}
+            </span>
+          )}
         </div>
       </div>
     </header>

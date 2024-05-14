@@ -25,6 +25,7 @@ export default async function CategoryPage({ params }: { params: { category: str
                     className="w-full h-full object-cover object-center lg:w-full lg:h-full"
                     width="300"
                     height="300"
+                    priority
                   />
                 </div>
 

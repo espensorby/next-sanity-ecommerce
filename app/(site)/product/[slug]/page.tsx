@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Star, Truck } from 'lucide-react';
 import ImageGallery from '../../(components)/ImageGallery';
 import AddToCart from '../../(components)/AddToCart';
+import CheckoutNow from '../../(components)/CheckoutNow';
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = await getProduct(params.slug);
@@ -44,11 +45,21 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <AddToCart
                 currency="USD"
                 price={product.price}
+                price_id={product.price_id}
                 name={product.name}
                 description={product.description}
                 image={product.images[0].image}
+                key={product._id}
               />
-              <Button variant="secondary">Go to Checkout</Button>
+              <CheckoutNow
+                currency="USD"
+                description={product.description}
+                image={product.images[0]}
+                name={product.name}
+                price={product.price}
+                key={product._id}
+                price_id={product.price_id}
+              />
             </div>
 
             <div className="mt-12 text-base text-gray-500 tracking-wide">{product.description}</div>

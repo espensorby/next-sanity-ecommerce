@@ -34,10 +34,20 @@ export interface SimplifiedProduct {
 export interface Product extends Omit<SimplifiedProduct, 'image' | 'imageUrl' | 'alt'> {
   images: CustomImage[];
   description: string;
+  price_id: string;
 }
 
 export interface Category {
   _id: string;
   name: string;
   slug: string;
+}
+
+export interface ProductCartType {
+  name: string;
+  description: string;
+  price: number;
+  price_id: string;
+  currency: string;
+  image: Image;
 }

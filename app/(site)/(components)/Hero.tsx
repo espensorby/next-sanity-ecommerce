@@ -44,14 +44,16 @@ export default async function Hero() {
       </div>
       <div className="flex flex-col justify-between items-center gap-8 md:flex-row">
         <div className="flex divide-x w-full h-12 border rounded-lg overflow-hidden md:w-96">
-          {categories.map((category) => (
-            <Link
-              key={category._id}
-              href={`/${category.slug}`}
-              className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
-              {category.name}
-            </Link>
-          ))}
+          {categories
+            .sort((a, b) => b.name.localeCompare(a.name))
+            .map((category) => (
+              <Link
+                key={category._id}
+                href={`/${category.slug}`}
+                className="flex justify-center items-center w-1/3 text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200">
+                {category.name}
+              </Link>
+            ))}
         </div>
       </div>
     </section>

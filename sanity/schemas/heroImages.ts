@@ -28,7 +28,7 @@ const heroImages = defineType({
         }),
       ],
     }),
-    {
+    defineField({
       name: 'image2',
       title: 'Second Image',
       type: 'image',
@@ -41,7 +41,7 @@ const heroImages = defineType({
           options: { isHighlighted: true },
         }),
       ],
-    },
+    }),
   ],
 });
 
